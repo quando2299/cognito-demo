@@ -1,12 +1,12 @@
 # Project Structure:
 
-CognitoDemo/
- ├── CognitoDemo.Domain/           # Entities, Value Objects, Domain Events
- ├── CognitoDemo.Core/             # Interfaces, Base classes
- ├── CognitoDemo.Infrastructure/   # Data access, External services
- ├── CognitoDemo.Application/      # Business logic, Services
- └── CognitoDemo.API/              # API Controllers, DTOs
-
+CognitoDemo/ </br>
+ ├── CognitoDemo.Domain/           # Entities, Value Objects, Domain Events </br>
+ ├── CognitoDemo.Core/             # Interfaces, Base classes </br>
+ ├── CognitoDemo.Infrastructure/   # Data access, External services </br>
+ ├── CognitoDemo.Application/      # Business logic, Services </br>
+ └── CognitoDemo.API/              # API Controllers, DTOs </br>
+ 
 
 ## Migrate Database
 
