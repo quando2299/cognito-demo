@@ -1,0 +1,6 @@
+@CognitoDemo.API_HostAddress = http://localhost:5186
+
+GET {{CognitoDemo.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
