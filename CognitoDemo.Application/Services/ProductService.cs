@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using CognitoDemo.Application.DTOs.Products;
 using CognitoDemo.Application.Interfaces;
+using CognitoDemo.Core.Extensions;
 using CognitoDemo.Core.Interfaces;
+using CognitoDemo.Core.Models;
 using CognitoDemo.Domain.Entities;
 
 namespace CognitoDemo.Application.Services;
@@ -9,9 +11,13 @@ namespace CognitoDemo.Application.Services;
 public class ProductService(IRepository<Product> productRepository, IMapper mapper, IUnitOfWork unitOfWork)
     : IProductService
 {
-    public Task<IQueryable<ProductDto>> GetAllAsync()
+    public async Task<IPaginate<ProductDto>> GetAllAsync(int pageIndex = 1, int pageSize = 10)
     {
-        throw new NotImplementedException();
+        var query = productRepository.TableNoTracking;
+        var products = await query.ToPaginateAsync(pageIndex, pageSize);
+        
+        var dtos = mapper.Map<List<ProductDto>>(products.Items);
+        return new Paginate<ProductDto>(dtos, products.TotalCount, pageIndex, pageSize);
     }
 
     public async Task<ProductDto> CreateAsync(CreateProductDto model)
