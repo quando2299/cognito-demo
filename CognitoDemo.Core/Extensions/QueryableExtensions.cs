@@ -20,9 +20,6 @@ public static class QueryableExtensions
         var hasNext = items.Count > pageSize;
         if (hasNext) items.RemoveAt(pageSize);
 
-        // If you need exact total count (optional):
-        // var totalCount = await source.CountAsync();
-        
         // Estimate total count based on current page
         var totalCount = (pageIndex - 1) * pageSize + items.Count;
         if (hasNext) totalCount += 1;
