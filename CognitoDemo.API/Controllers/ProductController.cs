@@ -4,7 +4,6 @@ using CognitoDemo.Application.DTOs.Products;
 using CognitoDemo.Application.Interfaces;
 using CognitoDemo.Core.Interfaces;
 using CognitoDemo.Core.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CognitoDemo.API.Controllers
@@ -24,13 +23,13 @@ namespace CognitoDemo.API.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProductCreateResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody] CreateProductRequest request)
+        public async Task<IActionResult> Create([FromBody] ProductCreateRequest request)
         {
-            var dto = mapper.Map<CreateProductDto>(request);
+            var dto = mapper.Map<ProductCreateDto>(request);
             var result = await productService.CreateAsync(dto);
-            var response = mapper.Map<ProductResponse>(result);
+            var response = mapper.Map<ProductCreateResponse>(result);
 
             return StatusCode(StatusCodes.Status201Created, response);
         }

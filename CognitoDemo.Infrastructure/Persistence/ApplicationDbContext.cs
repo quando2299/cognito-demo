@@ -12,7 +12,9 @@ public class ApplicationDbContext : DbContext
         // Get all types from Domain assembly that inherit from BaseEntity
         _entityTypes = typeof(BaseEntity).Assembly
             .GetTypes()
-            .Where(t => !t.IsAbstract && t.IsClass && t.IsSubclassOf(typeof(BaseEntity)));
+            .Where(t => !t.IsAbstract && t.IsClass && 
+                  (t.IsSubclassOf(typeof(BaseEntity)) || 
+                   t.GetInterfaces().Contains(typeof(BaseEntity))));
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

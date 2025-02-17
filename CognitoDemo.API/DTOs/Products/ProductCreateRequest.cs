@@ -2,7 +2,7 @@
 
 namespace CognitoDemo.API.DTOs.Products;
 
-public class CreateProductRequest
+public class ProductCreateRequest
 {
     [Required]
     [StringLength(200)]

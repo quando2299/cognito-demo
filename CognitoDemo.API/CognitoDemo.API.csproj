@@ -9,13 +9,14 @@
     <ItemGroup>
         <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="4.0.0-preview.1" />
         <PackageReference Include="AutoMapper" Version="13.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>

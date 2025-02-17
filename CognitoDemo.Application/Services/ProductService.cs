@@ -20,13 +20,18 @@ public class ProductService(IRepository<Product> productRepository, IMapper mapp
         return new Paginate<ProductDto>(dtos, products.TotalCount, pageIndex, pageSize);
     }
 
-    public async Task<ProductDto> CreateAsync(CreateProductDto model)
+    public async Task<ProductDetailDto> CreateAsync(ProductCreateDto model)
     {
+        await unitOfWork.BeginTransactionAsync();
         var product = mapper.Map<Product>(model);
 
         await productRepository.AddAsync(product);
         await unitOfWork.SaveChangeAsync();
-        
-        return mapper.Map<ProductDto>(product);
+
+        var response = mapper.Map<ProductDetailDto>(product);
+
+        await unitOfWork.CommitTransactionAsync();
+
+        return response;
     }
 }

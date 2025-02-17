@@ -29,6 +29,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ServiceMappingPr
 
 // Register Services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

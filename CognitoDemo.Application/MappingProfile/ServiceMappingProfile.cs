@@ -8,7 +8,12 @@ public class ServiceMappingProfile : Profile
 {
     public ServiceMappingProfile()
     {
-        CreateMap<CreateProductDto, Product>();
+        // Product
+        CreateMap<ProductCreateDto, Product>();
         CreateMap<Product, ProductDto>();
+        CreateMap<Product, ProductDetailDto>();
+
+        // Auth
+
     }
 }

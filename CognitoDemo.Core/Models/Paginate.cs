@@ -9,15 +9,15 @@ public class Paginate<T> : IPaginate<T>
     public int PageSize { get; }
     public int TotalCount { get; }
     public int TotalPages { get; }
-    public bool HasPreviousPage { get; }
-    public bool HasNextPage { get; }
+    public bool HasPreviousPage => PageIndex > 1;
+    public bool HasNextPage => PageIndex < TotalPages;
 
     public Paginate(IReadOnlyList<T> items, int count, int pageIndex, int pageSize)
     {
-        this.Items = items;
-        this.TotalCount = count;
-        this.PageIndex = pageIndex;
-        this.PageSize = pageSize;
+        Items = items;
+        TotalCount = count;
+        PageIndex = pageIndex;
+        PageSize = pageSize;
         TotalPages = (int)Math.Ceiling(count / (double)pageSize);
     }
 }
