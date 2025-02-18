@@ -4,10 +4,12 @@ using CognitoDemo.Application.DTOs.Products;
 using CognitoDemo.Application.Interfaces;
 using CognitoDemo.Core.Interfaces;
 using CognitoDemo.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CognitoDemo.API.Controllers
 {
+    //[Authorize]
     public class ProductController(IMapper mapper, IProductService productService) : BaseController
     {
         [HttpGet]
@@ -18,8 +20,17 @@ namespace CognitoDemo.API.Controllers
             [FromQuery] int pageSize = 10)
         {
             var result = await productService.GetAllAsync(pageIndex, pageSize);
-            var responses = mapper.Map<List<ProductResponse>>(result.Items);
-            return Ok(new Paginate<ProductResponse>(responses, result.TotalCount, pageIndex, pageSize));
+            var response = mapper.Map<List<ProductResponse>>(result.Items);
+            return Ok(new Paginate<ProductResponse>(response, result.TotalCount, pageIndex, pageSize));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDetailResponse?>> Get(Guid id)
+        {
+            var model = await productService.GetDetailAsync(id);
+            var response = mapper.Map<ProductDetailResponse>(model);
+
+            return Ok(response);
         }
         
         [HttpPost]

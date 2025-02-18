@@ -5,6 +5,7 @@ using CognitoDemo.Core.Extensions;
 using CognitoDemo.Core.Interfaces;
 using CognitoDemo.Core.Models;
 using CognitoDemo.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CognitoDemo.Application.Services;
 
@@ -33,5 +34,16 @@ public class ProductService(IRepository<Product> productRepository, IMapper mapp
         await unitOfWork.CommitTransactionAsync();
 
         return response;
+    }
+
+    public async Task<ProductDetailDto?> GetDetailAsync(Guid id)
+    {
+        var query = await productRepository.TableNoTracking.Where(m => m.Id == id).FirstOrDefaultAsync();
+
+        if (query == null) return null;
+
+        var model = mapper.Map<ProductDetailDto>(query);
+
+        return model;
     }
 }
